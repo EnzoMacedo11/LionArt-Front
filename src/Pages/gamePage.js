@@ -7,20 +7,29 @@ import Arts from "../Components/Arts/Arts";
 import { useEffect, useState } from "react";
 import useAuthors from "../hooks/api/useAuthors";
 import useArtTypes from "../hooks/api/useArtsTypes";
+import ArtGame from "../Components/ArtGame";
 
-export default function Home() {
+export default function GamePage() {
+
   const { arts } = useArts();
   const { authors } = useAuthors();
   const { types } = useArtTypes();
-
+ 
+  
   if (!arts || !authors || !types) {
     return "loading";
   }
 
+  const random = Math.floor(Math.random()*arts.length)
+  const artselected = arts[random]
+  console.log(artselected)
+  console.log(random)
+  console.log(arts.length)
+
   return (
     <Container>
       <OldNavBar types={types} authors={authors} />
-      <ArtSpace><Arts arts={arts} /></ArtSpace>
+      <Center><ArtGame art={artselected} /></Center>
       
     </Container>
   );
@@ -33,10 +42,9 @@ const Container = styled.div`
   background-image: url(${background});
 `;
 
-const ArtSpace = styled.div`
- display:flex;
- align-items:center;
- justify-content:center;
-`;
-
+const Center = styled.div`
+display:flex;
+align-items:center;
+justify-content:center;
+`
 

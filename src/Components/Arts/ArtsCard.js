@@ -53,8 +53,8 @@ const CardContainer = styled.div`
   width: 260px;
   height: 280px;
   border-radius: 10px;
-  margin-left:19px;
-  margin-right: 19px;
+  margin-left:5px;
+  margin-right: 5px;
   background-color: #d9c9bc;
   opacity:89%;
 
@@ -89,7 +89,7 @@ const InfoContainer = styled.div`
 `;
 
 const CardTitle = styled.p`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   color: #343434;
   margin-bottom: 5px;

@@ -13,6 +13,20 @@ export async function getArts(token) {
     console.log(error);
   }
 }
+
+export async function getUser(token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await api.get("user/", config);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function getAuthors(token) {
   const config = {
     headers: {
@@ -67,6 +81,23 @@ export async function getArtByAuthor(token, author) {
     const response = await api.get(`arts/author/${author}`, config);
     
     return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getArtByUser(token, userId) {
+  console.log("te",userId)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await api.get(`user/userArts/${userId}`, config);
+    
+    return response.data;
+
   } catch (error) {
     console.log(error);
   }

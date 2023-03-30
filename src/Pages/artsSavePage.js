@@ -7,21 +7,28 @@ import Arts from "../Components/Arts/Arts";
 import { useEffect, useState } from "react";
 import useAuthors from "../hooks/api/useAuthors";
 import useArtTypes from "../hooks/api/useArtsTypes";
+import useUser from "../hooks/api/useUsers";
+import useArtsByUser from "../hooks/api/useArtByUser";
 
-export default function Home() {
+export default function ArtsSaved() {
+  const { user } = useUser();
+  const { artByUser } = useArtsByUser();
   const { arts } = useArts();
   const { authors } = useAuthors();
   const { types } = useArtTypes();
 
-  if (!arts || !authors || !types) {
+  console.log("final", artByUser);
+
+  if (!arts || !authors || !types || !user) {
     return "loading";
   }
 
   return (
     <Container>
       <OldNavBar types={types} authors={authors} />
-      <ArtSpace><Arts arts={arts} /></ArtSpace>
-      
+      <ArtSpace>
+        <Arts arts={arts} />
+      </ArtSpace>
     </Container>
   );
 }
@@ -34,9 +41,7 @@ const Container = styled.div`
 `;
 
 const ArtSpace = styled.div`
- display:flex;
- align-items:center;
- justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
-
-
