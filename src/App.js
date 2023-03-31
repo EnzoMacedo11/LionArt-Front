@@ -65,7 +65,7 @@ function App() {
               </ProtectedRouteGuard>
             }
           />
-           <Route
+          <Route
             path="/shuffle"
             element={
               <ProtectedRouteGuard>
@@ -73,7 +73,7 @@ function App() {
               </ProtectedRouteGuard>
             }
           />
-            <Route
+          <Route
             path="/artsSaved"
             element={
               <ProtectedRouteGuard>

@@ -1,4 +1,5 @@
 import NavBar from "../Components/NavBar";
+import api from "../services/api";
 import styled from "styled-components";
 import background from "../image/background.jpg";
 import OldNavBar from "../Components/Home/NavBar";
@@ -9,17 +10,43 @@ import useAuthors from "../hooks/api/useAuthors";
 import useArtTypes from "../hooks/api/useArtsTypes";
 import useUser from "../hooks/api/useUsers";
 import useArtsByUser from "../hooks/api/useArtByUser";
+import useToken from "../hooks/useToken";
+import ArtsId from "../Components/Arts/ArtsId";
 
 export default function ArtsSaved() {
+  const [artsId, setArtsId] = useState([]);
+  const token = useToken();
   const { user } = useUser();
-  const { artByUser } = useArtsByUser();
   const { arts } = useArts();
   const { authors } = useAuthors();
   const { types } = useArtTypes();
+  console.log(artsId);
 
-  console.log("final", artByUser);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-  if (!arts || !authors || !types || !user) {
+  useEffect(() => {
+    if (user) {
+      const userId = user.id;
+      const promisse = api.get(
+        `http://localhost:4000/user/userArts/${userId}`,
+        config
+      );
+      promisse.then((res) => {
+        console.log(res.data);
+        setArtsId(res.data);
+        return promisse.data;
+      });
+      promisse.catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [user]);
+
+  if (!arts || !authors || !types || !user || !artsId) {
     return "loading";
   }
 
@@ -27,7 +54,7 @@ export default function ArtsSaved() {
     <Container>
       <OldNavBar types={types} authors={authors} />
       <ArtSpace>
-        <Arts arts={arts} />
+        <ArtsId arts={arts} artsId={artsId} />
       </ArtSpace>
     </Container>
   );

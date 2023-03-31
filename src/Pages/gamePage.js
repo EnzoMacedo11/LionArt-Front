@@ -39,7 +39,7 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #000;
-  background-image: url(${background});
+  background-image: url(${background}); // Com ofazer para deixar adptado com a tela.
 `;
 
 const Center = styled.div`

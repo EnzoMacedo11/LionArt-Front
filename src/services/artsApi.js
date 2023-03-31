@@ -87,7 +87,10 @@ export async function getArtByAuthor(token, author) {
 }
 
 export async function getArtByUser(token, userId) {
-  console.log("te",userId)
+  if(!token || !userId){
+     return
+  }
+  console.log('testeId', userId)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
