@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import useAuthors from "../hooks/api/useAuthors";
 import useArtTypes from "../hooks/api/useArtsTypes";
 import Art from "../Components/Art";
+import Loading from "../Components/Loading";
 
 export default function ShufflePage() {
 
@@ -17,7 +18,11 @@ export default function ShufflePage() {
  
   
   if (!arts || !authors || !types) {
-    return "loading";
+    return (
+      <ContainerLoading>
+        <Loading/>
+      </ContainerLoading>
+    );
   }
 
   const random = Math.floor(Math.random()*arts.length)
@@ -47,4 +52,12 @@ display:flex;
 align-items:center;
 justify-content:center;
 `
-
+const ContainerLoading = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color: #000;
+  background-image: url(${background});
+`;

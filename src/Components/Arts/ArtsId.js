@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function ArtsId({ arts, artsId }) {
   const artsSelected = arts.filter(a => artsId.some(b => b.artId === a.id))
 
-  if (!artsSelected) {
+  if (!artsSelected || artsSelected.length == 0) {
     return (
       <NoContainer>
         <h1>Ainda não foi salva nenhuma arte</h1>

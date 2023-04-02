@@ -10,6 +10,7 @@ import useArtTypes from "../hooks/api/useArtsTypes";
 import useArtsById from "../hooks/api/useArtById";
 import Art from "../Components/Art";
 import { useParams } from "react-router-dom";
+import Loading from "../Components/Loading";
 
 export default function ArtPage() {
   const { id } = useParams();
@@ -21,7 +22,11 @@ export default function ArtPage() {
   const { types } = useArtTypes();
 
   if (!arts || !authors || !types) {
-    return "loading";
+    return (
+      <ContainerLoading>
+        <Loading/>
+      </ContainerLoading>
+    );
   }
 
   return (
@@ -46,3 +51,12 @@ align-items:center;
 justify-content:center;
 `
 
+const ContainerLoading = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color: #000;
+  background-image: url(${background});
+`;

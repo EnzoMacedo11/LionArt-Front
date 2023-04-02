@@ -53,7 +53,8 @@ const CardContainer = styled.div`
   width: 260px;
   height: 280px;
   border-radius: 10px;
-  margin-left:5px;
+  margin-left:15px;
+  margin-top:10px;
   margin-right: 5px;
   background-color: #d9c9bc;
   opacity:89%;

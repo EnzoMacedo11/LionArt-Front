@@ -9,6 +9,7 @@ import useAuthors from "../hooks/api/useAuthors";
 import useArtTypes from "../hooks/api/useArtsTypes";
 import { useParams } from "react-router-dom";
 import useArtsByAuthor from "../hooks/api/useArtByAuthor";
+import Loading from "../Components/Loading";
 
 export default function AuthorPage() {
   const { author } = useParams();
@@ -18,14 +19,18 @@ export default function AuthorPage() {
   const { types } = useArtTypes();
 
   if (!authors || !types || !artByAuthor) {
-    return "loading";
+    return (
+      <ContainerLoading>
+        <Loading/>
+      </ContainerLoading>
+    );
   }
 
   return (
     <Container>
       <OldNavBar types={types} authors={authors} />
       <Main>
-        <h1>{author}</h1>
+        <h1> Autor: {author}</h1>
         <Center>
           <Arts arts={artByAuthor} />
         </Center>
@@ -59,4 +64,14 @@ const Main = styled.div`
     color: black;
     margin-bottom: 15px;
   }
+`;
+
+const ContainerLoading = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color: #000;
+  background-image: url(${background});
 `;

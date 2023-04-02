@@ -26,6 +26,7 @@ export default function Login() {
     });
     promisse.catch((err) => {
       console.log(err);
+      alert("Usuário e/ou Senha Incorreto(s)")
     });
   }
 

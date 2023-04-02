@@ -4,6 +4,7 @@ import styled from "styled-components";
 import AuthorCard from "../Authors";
 import TypesCard from "../Types/Index";
 
+
 const SideBar = ({ active, authors, types }) => {
   const closedSideBar = () => {
     active(false);
@@ -27,7 +28,6 @@ console.log('a', authors)
           author={a.author}
           key={index}/>
       ))}
-        <h2>Ver Todos</h2>
       </Authors>
       <ArtStyle>
         <h1>Tipos de Arte</h1>
@@ -37,7 +37,6 @@ console.log('a', authors)
           key={index}/>
       ))}
         
-        <h2>Ver Todos</h2>
       </ArtStyle>
 
     </Container>
@@ -104,6 +103,11 @@ font-weight: 300;
 color: #343434;
 margin-top: 15px;
 margin-bottom: 20px;
+}
+
+h1:hover{
+  color: blue;
+  transition:.4s;
 }
 `
 

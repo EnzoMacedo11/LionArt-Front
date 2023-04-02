@@ -12,6 +12,7 @@ import useUser from "../hooks/api/useUsers";
 import useArtsByUser from "../hooks/api/useArtByUser";
 import useToken from "../hooks/useToken";
 import ArtsId from "../Components/Arts/ArtsId";
+import Loading from "../Components/Loading";
 
 export default function ArtsSaved() {
   const [artsId, setArtsId] = useState([]);
@@ -47,7 +48,11 @@ export default function ArtsSaved() {
   }, [user]);
 
   if (!arts || !authors || !types || !user || !artsId) {
-    return "loading";
+    return (
+      <ContainerLoading>
+        <Loading/>
+      </ContainerLoading>
+    );
   }
 
   return (
@@ -71,4 +76,14 @@ const ArtSpace = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const ContainerLoading = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color: #000;
+  background-image: url(${background});
 `;

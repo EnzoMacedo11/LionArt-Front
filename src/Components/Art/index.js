@@ -1,12 +1,84 @@
 import styled from "styled-components";
+import api from "../../services/api";
+import { BookmarkOutline } from "react-ionicons";
+import { Bookmark } from "react-ionicons";
+import { useState } from "react";
+import useToken from "../../hooks/useToken";
+import { useEffect } from "react";
+import useUser from "../../hooks/api/useUsers";
 
 export default function Art({ art }) {
+  const [favorito, setFavorito] = useState(null);
+  const [artsId, setArtsId] = useState([]);
+  const { user } = useUser();
+  const token = useToken();
+  const artId = art.id;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-if(!art){
-    return(
-        <h1>loading</h1>
-        )
-}
+  function favoritar() {
+    console.log(config)
+    const promisse = api.post(
+      `http://localhost:4000/user/userArt/${artId}`,[],
+      config
+    );
+    promisse.then((res) => {
+      console.log(res.data);
+      setFavorito(true);
+    });
+    promisse.catch((err) => {
+      console.log(err);
+    });
+  }
+
+  function desfavoritar(){
+        const promisse = api.delete(
+          `http://localhost:4000/user/userArt/${artId}`,
+          config
+        );
+        promisse.then((res) => {
+          console.log(res.data);
+          setFavorito(false);
+        });
+        promisse.catch((err) => {
+          console.log(err);
+        });
+    
+  }
+
+  useEffect(() => {
+    if (user) {
+      const userId = user.id;
+      const promisse = api.get(
+        `http://localhost:4000/user/userArts/${userId}`,
+        config
+      );
+      promisse.then((res) => {
+        console.log(res.data);
+        setArtsId(res.data);
+        console.log("art", artId);
+        console.log("artId", res.data);
+        if (res.data.some((i) => i.artId === artId)) {
+          setFavorito(true);
+        } else {
+          setFavorito(false);
+        }
+      });
+      promisse.catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [user]);
+
+
+
+  if (!art) {
+    return <h1>loading</h1>;
+  }
+
   return (
     <CardContainer>
       <ImageContainer>
@@ -15,7 +87,19 @@ if(!art){
 
       <InfoContainer>
         <Division>
-          <Title>{art.title}</Title>
+          <Title>
+            {art.title}
+
+            {favorito ? (
+              <Icon1 onClick={desfavoritar}>
+                <Bookmark color={"#00000"} height="20px" width="20px" />
+              </Icon1>
+            ) : (
+              <Icon1 onClick={favoritar}>
+                <BookmarkOutline color={"#00000"} height="20px" width="20px" />
+              </Icon1>
+            )}
+          </Title>
           <Year>Ano: {art.age} </Year>
         </Division>
 
@@ -46,7 +130,7 @@ const CardContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-    margin-top:10px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   flex-flow: column nowrap;
@@ -54,7 +138,6 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-
   width: 880px;
   height: 550px;
   border-radius: 5px;
@@ -67,6 +150,9 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 24px;
   font-weight: 800;
   color: #343434;
@@ -102,13 +188,17 @@ const Year = styled.p`
 
 const Description = styled.div`
   margin-right: 20px;
-  margin-top:8px;
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
-  
+
   h2 {
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 8px;
   }
+`;
+const Icon1 = styled.div`
+  margin-top: 4px;
+  margin-left: 10px;
 `;

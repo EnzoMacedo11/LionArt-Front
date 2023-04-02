@@ -9,9 +9,12 @@ export default function ArtGame({ art }) {
   console.log(shot);
 
   function CompararRespostas() {
-    if (Resposta == shot) {
+    if (Resposta.toLowerCase() == shot.toLowerCase()) {
       alert("Voce acertou!!");
-    } else alert("Voce Errou!");
+      window.location.reload()
+    } else 
+    alert(`Voce errou! O artista era ${Resposta}`)
+    window.location.reload();
   }
 
   if (!art) {
@@ -19,17 +22,20 @@ export default function ArtGame({ art }) {
   }
   return (
     <CardContainer>
+      <h1>Descubra o artista!</h1>
       <ImageContainer>
         <Image src={art.imageUrl} />
       </ImageContainer>
       <GameConsole>
+        <form>
         <div className="inputbox">
           <input onChange={(e) => setShot(e.target.value)} value={shot}></input>
-          <label for="">Tentativas</label>
+          {/* <label for="">Tentativas</label> */}
         </div>
         <button type="submit" onClick={CompararRespostas}>
-          <h1>Tentar!</h1>
+          <h2>Tentar!</h2>
         </button>
+        </form>
       </GameConsole>
     </CardContainer>
   );
@@ -37,6 +43,8 @@ export default function ArtGame({ art }) {
 
 const CardContainer = styled.div`
   display: flex;
+  justify-content:center;
+  align-items:center;
   flex-flow: column nowrap;
   width: 940px;
   height: 740px;
@@ -51,7 +59,7 @@ const CardContainer = styled.div`
     width: 310px;
     border-radius: 15px;
     //border-bottom: 2px solid #fff;
-    background: #3f4090;
+    background: #606FA6;
   }
   .inputbox label {
     position: absolute;
@@ -85,25 +93,35 @@ const CardContainer = styled.div`
   }
 
   button {
-    width: 150px;
+    width: 120px;
     height: 45px;
-    background-color: #44418a;
+    background-color: #606FA6;
     border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
 
   button:hover {
     background-color: #2c244d;
     transition: 0.3s;
   }
+  h1{
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+  }
+  h2{
+    font-size: 15px;
+    font-weight: 400;
+    color: black;
+  }
 `;
 
 const ImageContainer = styled.div`
-  margin-top: 35px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
   flex-flow: column nowrap;
@@ -112,7 +130,7 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
   width: 880px;
-  height: 550px;
+  height: 540px;
   border-radius: 5px;
   margin-bottom: 10px;
 `;
@@ -122,5 +140,11 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
+form{
+  display: flex;
+  justify-content:center;
+align-items:center;
+flex-direction:column;
+}
 
 `

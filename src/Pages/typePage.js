@@ -10,6 +10,7 @@ import useArtTypes from "../hooks/api/useArtsTypes";
 import { useParams } from "react-router-dom";
 import useArtsByAuthor from "../hooks/api/useArtByAuthor";
 import useArtsByType from "../hooks/api/useArtByType";
+import Loading from "../Components/Loading";
 
 export default function TypePage() {
   const { type } = useParams();
@@ -20,14 +21,18 @@ export default function TypePage() {
 
 
   if (!authors || !types || !artByType) {
-    return "loading";
+    return (
+      <ContainerLoading>
+        <Loading/>
+      </ContainerLoading>
+    );
   }
   
   return (
     <Container>
       <OldNavBar types={types} authors={authors} />
       <Main>
-        <h1>{type}</h1>
+        <h1> Tipo de Arte: {type}</h1>
       <Center><Arts arts={artByType} /></Center>
       </Main>
       
@@ -60,4 +65,14 @@ const Main = styled.div`
     color: black;
     margin-bottom: 15px;
   }
+`;
+
+const ContainerLoading = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color: #000;
+  background-image: url(${background});
 `;

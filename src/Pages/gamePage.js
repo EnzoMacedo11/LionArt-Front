@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import useAuthors from "../hooks/api/useAuthors";
 import useArtTypes from "../hooks/api/useArtsTypes";
 import ArtGame from "../Components/ArtGame";
+import Loading from "../Components/Loading";
 
 export default function GamePage() {
 
@@ -17,7 +18,11 @@ export default function GamePage() {
  
   
   if (!arts || !authors || !types) {
-    return "loading";
+    return (
+      <ContainerLoading>
+        <Loading/>
+      </ContainerLoading>
+    );
   }
 
   const random = Math.floor(Math.random()*arts.length)
@@ -48,3 +53,12 @@ align-items:center;
 justify-content:center;
 `
 
+const ContainerLoading = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color: #000;
+  background-image: url(${background});
+`;
