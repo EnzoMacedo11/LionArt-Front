@@ -20,33 +20,26 @@ export default function Art({ art }) {
   };
 
   function favoritar() {
-    console.log(config)
     const promisse = api.post(
-      `http://localhost:4000/user/userArt/${artId}`,[],
+      `http://localhost:4000/user/userArt/${artId}`,
+      [],
       config
     );
     promisse.then((res) => {
-      console.log(res.data);
       setFavorito(true);
     });
-    promisse.catch((err) => {
-      console.log(err);
-    });
+    promisse.catch((err) => {});
   }
 
-  function desfavoritar(){
-        const promisse = api.delete(
-          `http://localhost:4000/user/userArt/${artId}`,
-          config
-        );
-        promisse.then((res) => {
-          console.log(res.data);
-          setFavorito(false);
-        });
-        promisse.catch((err) => {
-          console.log(err);
-        });
-    
+  function desfavoritar() {
+    const promisse = api.delete(
+      `http://localhost:4000/user/userArt/${artId}`,
+      config
+    );
+    promisse.then((res) => {
+      setFavorito(false);
+    });
+    promisse.catch((err) => {});
   }
 
   useEffect(() => {
@@ -57,10 +50,8 @@ export default function Art({ art }) {
         config
       );
       promisse.then((res) => {
-        console.log(res.data);
         setArtsId(res.data);
-        console.log("art", artId);
-        console.log("artId", res.data);
+
         if (res.data.some((i) => i.artId === artId)) {
           setFavorito(true);
         } else {
@@ -72,8 +63,6 @@ export default function Art({ art }) {
       });
     }
   }, [user]);
-
-
 
   if (!art) {
     return <h1>loading</h1>;

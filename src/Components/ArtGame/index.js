@@ -3,10 +3,10 @@ import styled from "styled-components";
                                                  //Melhorar jogo
 export default function ArtGame({ art }) {
   const Resposta = art.author;
-  console.log(Resposta);
+
 
   const [shot, setShot] = useState(null);
-  console.log(shot);
+  
 
   function CompararRespostas() {
     if (Resposta.toLowerCase() == shot.toLowerCase()) {

@@ -22,9 +22,10 @@ export default function Arts({arts}) {
 }
 
 const CardsContainer = styled.div`
+margin-top:25px;
   display: flex;
   flex-wrap: wrap;
-  height:700px;
+  height:72vh;
   overflow-x: auto;
   justify-content: center;
   ::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-import NavBar from "../Components/NavBar";
+
 import styled from "styled-components";
 import background from "../image/background.jpg";
 import OldNavBar from "../Components/Home/NavBar";
@@ -27,9 +27,7 @@ export default function GamePage() {
 
   const random = Math.floor(Math.random()*arts.length)
   const artselected = arts[random]
-  console.log(artselected)
-  console.log(random)
-  console.log(arts.length)
+  
 
   return (
     <Container>
@@ -44,7 +42,8 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #000;
-  background-image: url(${background}); // Com ofazer para deixar adptado com a tela.
+  background-image: url(${background});
+  background-size:cover;
 `;
 
 const Center = styled.div`
@@ -61,4 +60,5 @@ const ContainerLoading = styled.div`
   align-items:center;
   background-color: #000;
   background-image: url(${background});
+  background-size:cover;
 `;

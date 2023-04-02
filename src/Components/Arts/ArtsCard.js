@@ -20,14 +20,6 @@ export default function ArtCard(props) {
   }
 
 
- 
-
-//   function handleSelection() {
-//     if (hotel !== hotelId) {
-//       return selectHotel(hotelId);
-//     }
-//     selectHotel(null);
-//   }
 
   return (
     <CardContainer onClick={cardId} >

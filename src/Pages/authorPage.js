@@ -1,4 +1,4 @@
-import NavBar from "../Components/NavBar";
+
 import styled from "styled-components";
 import background from "../image/background.jpg";
 import OldNavBar from "../Components/Home/NavBar";
@@ -13,7 +13,6 @@ import Loading from "../Components/Loading";
 
 export default function AuthorPage() {
   const { author } = useParams();
-  console.log(author);
   const { artByAuthor } = useArtsByAuthor(author);
   const { authors } = useAuthors();
   const { types } = useArtTypes();
@@ -30,7 +29,7 @@ export default function AuthorPage() {
     <Container>
       <OldNavBar types={types} authors={authors} />
       <Main>
-        <h1> Autor: {author}</h1>
+        <h1> Artista: {author}</h1>
         <Center>
           <Arts arts={artByAuthor} />
         </Center>
@@ -44,6 +43,7 @@ const Container = styled.div`
   width: 100vw;
   background-color: #000;
   background-image: url(${background});
+  background-size:cover;
 `;
 
 const Center = styled.div`
@@ -74,4 +74,5 @@ const ContainerLoading = styled.div`
   align-items:center;
   background-color: #000;
   background-image: url(${background});
+  background-size:cover;
 `;

@@ -1,4 +1,4 @@
-import NavBar from "../Components/NavBar";
+
 import api from "../services/api";
 import styled from "styled-components";
 import background from "../image/background.jpg";
@@ -21,7 +21,7 @@ export default function ArtsSaved() {
   const { arts } = useArts();
   const { authors } = useAuthors();
   const { types } = useArtTypes();
-  console.log(artsId);
+  
 
   const config = {
     headers: {
@@ -37,12 +37,10 @@ export default function ArtsSaved() {
         config
       );
       promisse.then((res) => {
-        console.log(res.data);
         setArtsId(res.data);
         return promisse.data;
       });
       promisse.catch((err) => {
-        console.log(err);
       });
     }
   }, [user]);
@@ -70,6 +68,7 @@ const Container = styled.div`
   width: 100vw;
   background-color: #000;
   background-image: url(${background});
+  background-size:cover;
 `;
 
 const ArtSpace = styled.div`
@@ -86,4 +85,5 @@ const ContainerLoading = styled.div`
   align-items:center;
   background-color: #000;
   background-image: url(${background});
+  background-size:cover;
 `;

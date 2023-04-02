@@ -1,4 +1,3 @@
-import NavBar from "../Components/NavBar";
 import styled from "styled-components";
 import background from "../image/background.jpg";
 import OldNavBar from "../Components/Home/NavBar";
@@ -14,9 +13,9 @@ import Loading from "../Components/Loading";
 
 export default function ArtPage() {
   const { id } = useParams();
-  console.log("bata", id);
+  
   const {artById} = useArtsById(id);
-  console.log("art", artById);
+
   const { arts } = useArts();
   const { authors } = useAuthors();
   const { types } = useArtTypes();
@@ -43,6 +42,7 @@ const Container = styled.div`
   width: 100vw;
   background-color: #000;
   background-image: url(${background});
+  background-size:cover;
 `;
 
 const Center = styled.div`
@@ -59,4 +59,5 @@ const ContainerLoading = styled.div`
   align-items:center;
   background-color: #000;
   background-image: url(${background});
+  background-size:cover;
 `;

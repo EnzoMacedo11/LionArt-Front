@@ -1,4 +1,3 @@
-import NavBar from "../Components/NavBar";
 import styled from "styled-components";
 import background from "../image/background.jpg";
 import OldNavBar from "../Components/Home/NavBar";
@@ -14,11 +13,10 @@ export default function Home() {
   const { authors } = useAuthors();
   const { types } = useArtTypes();
 
-
   if (!arts || !authors || !types) {
     return (
       <ContainerLoading>
-        <Loading/>
+        <Loading />
       </ContainerLoading>
     );
   }
@@ -39,28 +37,30 @@ const Container = styled.div`
   width: 100vw;
   background-color: #000;
   background-image: url(${background});
+  background-size: cover;
 `;
 
 const ContainerLoading = styled.div`
   height: 100vh;
   width: 100vw;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #000;
   background-image: url(${background});
+  background-size: cover;
 `;
 
 const ArtSpace = styled.div`
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   h1 {
     font-size: 20px;
     font-weight: 700;
     color: black;
-    margin-top:15px;
+    margin-top: 15px;
     margin-bottom: 15px;
   }
 `;

@@ -98,6 +98,7 @@ const Container = styled.div`
   align-items: center;
   background-color: #000;
   background-image: url(${background});
+  background-size:cover;
 `;
 
 const CardInfos = styled.div`
