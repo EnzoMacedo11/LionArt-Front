@@ -13,7 +13,7 @@ export default function Art({ art }) {
   const { user } = useUser();
   const conection = process.env.REACT_APP_API_BASE_URL
   const token = useToken();
-  const artId = art.id;
+  
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -21,6 +21,7 @@ export default function Art({ art }) {
   };
 
   function favoritar() {
+    const artId = art.id;
     const promisse = api.post(
       `${conection}/user/userArt/${artId}`,
       [],
@@ -33,6 +34,7 @@ export default function Art({ art }) {
   }
 
   function desfavoritar() {
+    const artId = art.id;
     const promisse = api.delete(
       `${conection}/user/userArt/${artId}`,
       config
@@ -45,6 +47,7 @@ export default function Art({ art }) {
 
   useEffect(() => {
     if (user) {
+      const artId = art.id;
       const userId = user.id;
       const promisse = api.get(
         `${conection}/user/userArts/${userId}`,
