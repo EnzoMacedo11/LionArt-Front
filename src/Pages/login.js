@@ -6,11 +6,15 @@ import background from "../image/background.jpg";
 import logo from "../image/logo1.png";
 import UserContext from "../contexts/UserContext";
 
+
+
 export default function Login() {
   const Navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setUserData } = useContext(UserContext);
+  const conection = process.env.REACT_APP_API_BASE_URL
+
 
   function sendLogin(event) {
     event.preventDefault();
@@ -18,9 +22,8 @@ export default function Login() {
       email: email,
       password: password,
     };
-    const promisse = axios.post("http://localhost:4000/signin", info);
+    const promisse = axios.post(`${conection}/signin`, info);
     promisse.then((res) => {
-      console.log(res.data);
       setUserData(res.data);
       Navigate("/home");
     });

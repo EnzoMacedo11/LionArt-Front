@@ -11,6 +11,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const conection = process.env.REACT_APP_API_BASE_URL
 
   function sendRegister(event) {
     event.preventDefault();
@@ -20,9 +21,8 @@ export default function Register() {
       lastName: lastName,
       password: password,
     };
-    const promisse = axios.post("http://localhost:4000/signup/", info);
+    const promisse = axios.post(`${conection}/signup`, info);
     promisse.then((res) => {
-      console.log(res.data);
       Navigate("/");
     });
     promisse.catch((err) => {

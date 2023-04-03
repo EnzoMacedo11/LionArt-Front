@@ -11,6 +11,7 @@ export default function Art({ art }) {
   const [favorito, setFavorito] = useState(null);
   const [artsId, setArtsId] = useState([]);
   const { user } = useUser();
+  const conection = process.env.REACT_APP_API_BASE_URL
   const token = useToken();
   const artId = art.id;
   const config = {
@@ -21,7 +22,7 @@ export default function Art({ art }) {
 
   function favoritar() {
     const promisse = api.post(
-      `http://localhost:4000/user/userArt/${artId}`,
+      `${conection}/user/userArt/${artId}`,
       [],
       config
     );
@@ -33,7 +34,7 @@ export default function Art({ art }) {
 
   function desfavoritar() {
     const promisse = api.delete(
-      `http://localhost:4000/user/userArt/${artId}`,
+      `${conection}/user/userArt/${artId}`,
       config
     );
     promisse.then((res) => {
@@ -46,7 +47,7 @@ export default function Art({ art }) {
     if (user) {
       const userId = user.id;
       const promisse = api.get(
-        `http://localhost:4000/user/userArts/${userId}`,
+        `${conection}/user/userArts/${userId}`,
         config
       );
       promisse.then((res) => {

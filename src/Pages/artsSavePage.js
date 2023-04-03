@@ -21,7 +21,7 @@ export default function ArtsSaved() {
   const { arts } = useArts();
   const { authors } = useAuthors();
   const { types } = useArtTypes();
-  
+  const conection = process.env.REACT_APP_API_BASE_URL
 
   const config = {
     headers: {
@@ -33,7 +33,7 @@ export default function ArtsSaved() {
     if (user) {
       const userId = user.id;
       const promisse = api.get(
-        `http://localhost:4000/user/userArts/${userId}`,
+        `${conection}/user/userArts/${userId}`,
         config
       );
       promisse.then((res) => {
